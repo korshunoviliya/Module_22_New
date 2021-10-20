@@ -7,8 +7,9 @@ int main() {
     std::map<std::string, int> temp;
     std::string family;
     int count{0};
-    auto itReg = reg.begin();
-    auto itTemp = temp.begin();
+    int countTemp{0};
+    std::map<int, std::string>::iterator itReg = reg.begin();
+    std::map<std::string, int>::iterator itTemp = temp.begin();
 
     while (true)
     {
@@ -22,7 +23,18 @@ int main() {
                 temp.insert(std::pair<std::string, int>(itReg->second, itReg->first));
             }
 
-            //
+            std::map<std::string, int>::iterator itTemp = temp.begin();
+            std::advance (itTemp, countTemp);
+            std::map<int, std::string>::iterator itReg = reg.find(itTemp -> second);
+            std::cout << itReg->second << std::endl;
+
+            if(itReg == reg.end())
+            {
+                std::cout << "The queue is over!!!" << std::endl;
+                itReg--;
+            }
+            itReg++;
+            countTemp++;
         }
         else
         {
@@ -31,4 +43,3 @@ int main() {
         }
     }
 }
-
