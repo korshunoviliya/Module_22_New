@@ -4,7 +4,7 @@
 
 int main() {
     std::map<int, std::string> reg;
-    std::multimap<std::string, int> temp;
+    std::map<std::string, int> temp;
     std::string family;
     int count{0};
     auto itReg = reg.begin();
