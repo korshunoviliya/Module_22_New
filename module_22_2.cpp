@@ -15,7 +15,7 @@ int main() {
         std::cout << "Enter family or command:next\n";
         std::cin >> family;
 
-        if (family == "n")
+        if (family == "next")
         {
             if(itReg != reg.end())
             {
