@@ -7,39 +7,48 @@ int main() {
     std::map<std::string, int> temp;
     std::string family;
     int count{0};
-    int countTemp{0};
-    std::map<int, std::string>::iterator itReg = reg.begin();
-    std::map<std::string, int>::iterator itTemp = temp.begin();
+    auto itReg = reg.begin();
+    auto itTemp = temp.begin();
 
     while (true)
     {
         std::cout << "Enter family or command:next\n";
         std::cin >> family;
 
-        if (family == "next")
+        if (family == "n")
         {
-            for (itReg = reg.begin(); itReg != reg.end(); itReg++)
+            if(itReg != reg.end())
             {
-                temp.insert(std::pair<std::string, int>(itReg->second, itReg->first));
+                itReg = reg.find(itTemp -> second);
+                std::cout << itReg->second << std::endl;
+                if(itReg != reg.end()) itReg++;
+                if(itReg -> second != itTemp -> first)
+                {
+                    temp.erase(itTemp);
+                    itTemp = temp.begin();
+                    itReg--;
+                    reg.erase(itReg);
+                    itReg = reg.begin();
+                }
+                else
+                {
+                    reg.erase(itReg);
+                    itReg--;
+                    itTemp = temp.begin();
+                }
             }
-
-            std::map<std::string, int>::iterator itTemp = temp.begin();
-            std::advance (itTemp, countTemp);
-            std::map<int, std::string>::iterator itReg = reg.find(itTemp -> second);
-            std::cout << itReg->second << std::endl;
-
-            if(itReg == reg.end())
+            else
             {
                 std::cout << "The queue is over!!!" << std::endl;
-                itReg--;
             }
-            itReg++;
-            countTemp++;
         }
         else
         {
             reg.insert(std::pair<int, std::string>(count, family));
+            temp.insert(std::pair<std::string, int>(family, count));
             count++;
+            itReg = reg.begin();
+            itTemp = temp.begin();
         }
     }
 }
