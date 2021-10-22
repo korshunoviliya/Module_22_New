@@ -40,11 +40,10 @@ bool anagramm(std::string first, std::string second)
 }
 
 int main() {
-
-    //bool check = anagramm("hello", "heloo");
-    //bool check = anagramm("steklovar", "lekarstvo");
-    //bool check = anagramm("hello", "lhole");
     bool check = anagramm("стекловар", "лекарство");
+    //check = anagramm("hello", "heloo");
+    //check = anagramm("steklovar", "lekarstvo");
+    //check = anagramm("hello", "lhole");
 
     if(check) std::cout << "ok!" << std::endl;
     else std::cout << "no!" << std::endl;
