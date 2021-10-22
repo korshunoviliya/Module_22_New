@@ -3,12 +3,11 @@
 #include <string>
 
 int main() {
-    std::map<int, std::string> reg;
-    std::map<std::string, int> temp;
+
+    std::map<std::string, int> reg;
     std::string family;
-    int count{0};
     auto itReg = reg.begin();
-    auto itTemp = temp.begin();
+    int numRepeat{0};
 
     while (true)
     {
@@ -17,25 +16,19 @@ int main() {
 
         if (family == "next")
         {
-            if(itReg != reg.end())
+            if (itReg != reg.end())
             {
-                itReg = reg.find(itTemp -> second);
-                std::cout << itReg->second << std::endl;
-                if(itReg != reg.end()) itReg++;
-                if(itReg -> second != itTemp -> first)
-                {
-                    temp.erase(itTemp);
-                    itTemp = temp.begin();
-                    itReg--;
-                    reg.erase(itReg);
-                    itReg = reg.begin();
-                }
-                else
-                {
-                    reg.erase(itReg);
-                    itReg--;
-                    itTemp = temp.begin();
-                }
+                    if((itReg -> second) > 1)
+                    {
+                        std::cout << itReg -> first << std::endl;
+                        (itReg -> second)--;
+                    }
+                    else
+                    {
+                        std::cout << itReg -> first << std::endl;
+                        reg.erase(itReg);
+                        if(itReg != reg.end()) itReg = reg.begin();
+                    }
             }
             else
             {
@@ -44,11 +37,17 @@ int main() {
         }
         else
         {
-            reg.insert(std::pair<int, std::string>(count, family));
-            temp.insert(std::pair<std::string, int>(family, count));
-            count++;
+            reg.insert(std::pair<std::string, int>(family, numRepeat));
+                bool check = true;
+                for (auto itRepeat = reg.begin();
+                     (itRepeat != reg.end()) && check; itRepeat++) {
+                    if (itRepeat->first == family)
+                    {
+                        (itRepeat -> second)++;
+                        check = false;
+                    }
+                }
             itReg = reg.begin();
-            itTemp = temp.begin();
         }
     }
 }
